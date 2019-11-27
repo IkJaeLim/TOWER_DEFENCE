@@ -6,33 +6,20 @@ using UnityEngine.EventSystems;
 public class Node : MonoBehaviour
 {
     public Vector3 positionOffset;
+	[Header("Turret Info")]
+    public TurretBlueprint standardTurret;
+    public TurretBlueprint missileLauncher;
+    public TurretBlueprint laserBeamer;
 
     [HideInInspector]
     public GameObject turret;
-
 	[HideInInspector]
 	public TurretBlueprint turretBlueprint;
 	[HideInInspector]
 	public bool isUpgraded = false;
 
 	BuildManager buildManager;
-	[HideInInspector]
-	private GameObject[] tur;
-	[HideInInspector]
-	private GameObject[] tur_upgrade;
 
-	void Awake() {
-		tur = new GameObject[3];
-		tur_upgrade = new GameObject[3];
-
-		tur[0] = Resources.Load<GameObject>("StandardTurret") as GameObject;
-        tur[1] = Resources.Load<GameObject>("MissileLauncher") as GameObject;
-        tur[2] = Resources.Load<GameObject>("LaserBeamer") as GameObject;
-
-		tur_upgrade[0] = Resources.Load<GameObject>("StandardTurret_Upgraded") as GameObject;
-		tur_upgrade[1] = Resources.Load<GameObject>("MissileLauncher_Upgraded") as GameObject;
-		tur_upgrade[2] = Resources.Load<GameObject>("LaserBeamer_Upgraded") as GameObject;
-	}
 	void Start ()
 	{
 		buildManager = BuildManager.instance;
@@ -67,9 +54,16 @@ public class Node : MonoBehaviour
 			return;
 		}
 
+        GameObject []Tur = new GameObject[3];
+
+        Tur[0] = Resources.Load<GameObject>("StandardTurret") as GameObject;
+        Tur[1] = Resources.Load<GameObject>("MissileLauncher") as GameObject;
+        Tur[2] = Resources.Load<GameObject>("LaserBeamer") as GameObject;
+         
+
 		PlayerStats.Money -= turretBlueprint.cost;
 
-		GameObject _turret = (GameObject)Instantiate(tur[Random.Range(0,3)], GetBuildPosition(), Quaternion.identity);
+		GameObject _turret = (GameObject)Instantiate(Tur[Random.Range(0,3)], GetBuildPosition(), Quaternion.identity);
 		turret = _turret;
 
 		GameObject effect = (GameObject)Instantiate(buildManager.buildEffect, GetBuildPosition(), Quaternion.identity);
@@ -88,7 +82,20 @@ public class Node : MonoBehaviour
 		}
 
 		PlayerStats.Money -= turretBlueprint.cost;
+		GameObject []tur_upgrade = new GameObject[3];
 
+		tur_upgrade[0] = Resources.Load<GameObject>("StandardTurret_Upgraded") as GameObject;
+		tur_upgrade[1] = Resources.Load<GameObject>("MissileLauncher_Upgraded") as GameObject;
+		tur_upgrade[2] = Resources.Load<GameObject>("LaserBeamer_Upgraded") as GameObject;
+
+       /*
+        GameObject[] Turup = new GameObject[3];
+
+        Turup[0] = Resources.Load<GameObject>("Resources/LaserBeamer_Upgraded") as GameObject;
+        Turup[1] = Resources.Load<GameObject>("Resources/MissileLauncher_Upgraded") as GameObject;
+        Turup[2] = Resources.Load<GameObject>("Resources/StandardTurret_Upgraded") as GameObject;
+        */
+        //Get rid of the old turret
         Destroy(turret);
 
 		//Build a new one
@@ -112,8 +119,7 @@ public class Node : MonoBehaviour
 		Destroy(effect, 5f);
 
 		Destroy(turret);
-		turretBlueprint.init();
-		turret = null;
+		turretBlueprint = null;
 	}
 
 	void OnMouseEnter ()

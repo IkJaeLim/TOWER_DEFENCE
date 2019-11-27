@@ -1,12 +1,21 @@
-﻿using UnityEngine;
+﻿//이승현
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class LivesUI : MonoBehaviour {
 
-	public Text livesText;
+	public Text life;
 
-	// Update is called once per frame
-	void Update () {
-		livesText.text = PlayerStats.Lives.ToString();
+    // Start is called before the first frame update
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update () {
+		life.text = PlayerStats.Lives.ToString();
 	}
 }

@@ -37,7 +37,6 @@ public class Enemy : MonoBehaviour {
 			Die();
 		}
 	}
-
 	public void Slow (float pct)
 	{
 		speed = startSpeed * (1f - pct);

@@ -6,9 +6,7 @@ public class WaveSpawner : MonoBehaviour {
 
 	public static int EnemiesAlive = 0;
 
-    public GameObject cat = CAT;
 	public Wave[] waves;
-    public GameObject[] ene= { CAT, DUCK, MOLE, PENGUIN, SHEEP };
 
 	public Transform spawnPoint;
 
@@ -47,11 +45,7 @@ public class WaveSpawner : MonoBehaviour {
 	{
 		PlayerStats.Rounds++;
 		Wave wave = waves[waveIndex];
-        if (PlayerStats.Rounds == 6)
-        {
-            for (i = 0; i < 5; i++)
-                ene[i].Enemy.health += 10000;
-        }
+
 		EnemiesAlive = wave.count;
 
 		for (int i = 0; i < wave.count; i++)

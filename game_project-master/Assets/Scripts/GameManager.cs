@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour {
 	public static bool GameIsOver;
 
 	public GameObject gameOverUI;
-	public GameObject completeLevelUI;	
+	public GameObject completeLevelUI;
 
 	void Start ()
 	{

@@ -8,8 +8,9 @@ public class EnemyMovement : MonoBehaviour {
 	private int wavepointIndex = 0;
 
 	private Enemy enemy;
+    int rotate = 180;
 
-	void Start()
+    void Start()
 	{
 		enemy = GetComponent<Enemy>();
 

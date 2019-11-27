@@ -5,7 +5,7 @@ public class PauseMenu : MonoBehaviour {
 
 	public GameObject ui;
 
-	public string menuSceneName = "MainMenu";
+	public string menuSceneName;
 
 	public SceneFader sceneFader;
 
